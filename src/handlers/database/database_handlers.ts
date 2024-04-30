@@ -26,6 +26,16 @@ export const databaseHandler: Handler<{
     case "StampLicenseLetter":
       data = await prisma.stampLicense.findMany();
       break;
+    case "delete":
+      await prisma.permission.deleteMany({});
+      await prisma.activity.deleteMany({});
+      await prisma.accountRequest.deleteMany({});
+      await prisma.newLicense.deleteMany({});
+      await prisma.addNewActivity.deleteMany({});
+      await prisma.stampLicense.deleteMany({});
+      await prisma.inspectionRequest.deleteMany({});
+      data = "All Records Deleted";
+      break;
 
     default:
       return new BadRequestError("No Table Found");
